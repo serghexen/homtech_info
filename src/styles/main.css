@@ -699,16 +699,16 @@ svg {
   .hero__description {
     position: relative;
     z-index: 3;
-    max-width: 53%;
+    max-width: 49%;
     margin-top: 8px;
     font-size: 11px;
     line-height: 1.4;
   }
 
   .hero__visual {
-    top: 47px;
-    right: -36px;
-    width: 66%;
+    top: 54px;
+    right: -22px;
+    width: 50%;
   }
 
   .hero::before {
@@ -721,7 +721,7 @@ svg {
   }
 
   .hero__visual img {
-    width: 130%;
+    width: 112%;
     filter: drop-shadow(0 13px 24px rgba(0, 28, 139, .28));
   }
 
