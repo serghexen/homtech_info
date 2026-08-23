@@ -1,0 +1,30 @@
+services:
+  web:
+    build: .
+    container_name: homtech-info-web
+    restart: unless-stopped
+    expose:
+      - "80"
+    mem_limit: 96m
+    cpus: "0.20"
+
+  gateway:
+    image: caddy:2.8-alpine
+    container_name: homtech-info-gateway
+    restart: unless-stopped
+    depends_on:
+      web:
+        condition: service_healthy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./deploy/caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    mem_limit: 96m
+    cpus: "0.20"
+
+volumes:
+  caddy_data:
+  caddy_config:

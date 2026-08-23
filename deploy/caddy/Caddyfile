@@ -1,0 +1,4 @@
+market.homtech.app {
+  encode zstd gzip
+  reverse_proxy web:80
+}
