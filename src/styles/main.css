@@ -655,7 +655,7 @@ svg {
   }
 
   .site-header .joy-logo {
-    transform: scale(.76) rotate(-3deg);
+    transform: scale(.76);
     transform-origin: left center;
   }
 
