@@ -257,9 +257,9 @@ svg {
 .hero__visual img {
   position: relative;
   z-index: 2;
-  width: 117%;
-  max-width: 620px;
-  margin-left: -13%;
+  width: 96%;
+  max-width: 540px;
+  margin-left: 0;
   filter: drop-shadow(0 22px 34px rgba(0, 28, 139, .34));
   animation: mascot-enter .8s cubic-bezier(.2, .8, .2, 1) both, mascot-float 5s ease-in-out .9s infinite;
 }
