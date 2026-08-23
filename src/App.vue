@@ -30,17 +30,6 @@ onMounted(() => {
       <a class="brand-link" href="#top" :aria-label="`${store.name}: наверх`">
         <BrandLogo />
       </a>
-
-      <nav aria-label="Навигация по странице">
-        <a href="#top">Главная</a>
-        <a class="nav-active" href="#support">Поддержка</a>
-      </nav>
-
-      <a class="header-contact" href="#contacts">
-        <span class="header-contact__dot"></span>
-        <SupportIcon name="chat" />
-        Связаться с нами
-      </a>
     </header>
 
     <main id="top" class="wrap">
