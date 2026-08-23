@@ -9,9 +9,9 @@ import { resolveStore } from './config/stores'
 const store = resolveStore(globalThis.location?.hostname)
 
 const heroBenefits = [
-  { icon: 'clock', title: 'Быстро', text: '5–15 минут' },
-  { icon: 'chat', title: 'Каждый день', text: 'Без выходных' },
-  { icon: 'lock', title: 'Безопасно', text: 'Не просим пароли' },
+  { icon: 'clock', title: 'Быстро', text: '5–15 минут', mobileTitle: 'Быстро', mobileText: '5–15 минут' },
+  { icon: 'chat', title: 'Каждый день', text: 'Без выходных', mobileTitle: 'Ежедневно', mobileText: '11:00–22:00' },
+  { icon: 'lock', title: 'Безопасно', text: 'Не просим пароли', mobileTitle: 'Безопасно', mobileText: 'Без паролей' },
 ]
 
 onMounted(() => {
@@ -47,8 +47,12 @@ onMounted(() => {
             <article v-for="benefit in heroBenefits" :key="benefit.title" class="hero-benefit">
               <SupportIcon :name="benefit.icon" />
               <div>
-                <strong>{{ benefit.title }}</strong>
-                <span>{{ benefit.text }}</span>
+                <strong>
+                  <span class="desktop-copy">{{ benefit.title }}</span>
+                  <span class="mobile-copy">{{ benefit.mobileTitle }}</span>
+                </strong>
+                <span class="hero-benefit__text desktop-copy">{{ benefit.text }}</span>
+                <span class="hero-benefit__text mobile-copy">{{ benefit.mobileText }}</span>
               </div>
             </article>
           </div>

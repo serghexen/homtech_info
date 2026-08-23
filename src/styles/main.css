@@ -233,12 +233,16 @@ svg {
   white-space: nowrap;
 }
 
-.hero-benefit span {
+.hero-benefit__text {
   overflow: hidden;
   color: #9da6c3;
   font-size: 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.hero-benefit .mobile-copy {
+  display: none;
 }
 
 .hero__visual {
@@ -734,7 +738,7 @@ svg {
 
   .hero-benefit {
     min-height: 62px;
-    gap: 6px;
+    gap: 4px;
     padding: 8px;
     border: 1px solid rgba(129, 93, 224, .19);
     border-radius: 15px;
@@ -751,7 +755,15 @@ svg {
     font-size: 10px;
   }
 
-  .hero-benefit span {
+  .hero-benefit .desktop-copy {
+    display: none;
+  }
+
+  .hero-benefit .mobile-copy {
+    display: block;
+  }
+
+  .hero-benefit__text {
     font-size: 8px;
   }
 
