@@ -27,9 +27,9 @@ onMounted(() => {
     <div class="ambient ambient--two"></div>
 
     <header class="site-header wrap">
-      <a class="brand-link" href="#top" :aria-label="`${store.name}: наверх`">
+      <div class="brand-mark">
         <BrandLogo />
-      </a>
+      </div>
     </header>
 
     <main id="top" class="wrap">

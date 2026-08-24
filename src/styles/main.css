@@ -105,9 +105,8 @@ svg {
   align-items: center;
 }
 
-.brand-link {
+.brand-mark {
   width: max-content;
-  text-decoration: none;
 }
 
 .availability span {
@@ -374,8 +373,7 @@ svg {
   transform: translateY(-4px);
 }
 
-.contact-card:focus-visible,
-.brand-link:focus-visible {
+.contact-card:focus-visible {
   outline: 3px solid rgba(109, 142, 255, .78);
   outline-offset: 4px;
 }
