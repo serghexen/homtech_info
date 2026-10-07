@@ -4,15 +4,11 @@ import BrandLogo from './components/BrandLogo.vue'
 import ContactCard from './components/ContactCard.vue'
 import SupportIcon from './components/SupportIcon.vue'
 import cloudMascot from './assets/joycards-cloud.png'
+import SteamTopup from './components/SteamTopup.vue'
 import { resolveStore } from './config/stores'
 
 const store = resolveStore(globalThis.location?.hostname)
 
-const heroBenefits = [
-  { icon: 'clock', title: 'Быстро', text: '5–15 минут', mobileTitle: 'Быстро', mobileText: '5–15 минут' },
-  { icon: 'chat', title: 'Каждый день', text: 'Без выходных', mobileTitle: 'Ежедневно', mobileText: '11:00–22:00' },
-  { icon: 'lock', title: 'Безопасно', text: 'Не просим пароли', mobileTitle: 'Безопасно', mobileText: 'Без паролей' },
-]
 
 onMounted(() => {
   // Синхронизирует данные вкладки с магазином, выбранным по текущему домену.
@@ -33,29 +29,13 @@ onMounted(() => {
     </header>
 
     <main id="top" class="wrap">
-      <section class="hero" aria-labelledby="hero-title">
+      <section class="hero hero--steam" aria-labelledby="hero-title">
         <div class="hero__spark hero__spark--orange" aria-hidden="true">✦</div>
         <div class="hero__spark hero__spark--violet" aria-hidden="true">•</div>
         <div class="hero__spark hero__spark--blue" aria-hidden="true">•</div>
 
         <div class="hero__copy">
-          <p class="availability"><span></span>{{ store.eyebrow }}</p>
-          <h1 id="hero-title">Нужна <em>помощь?</em></h1>
-          <p class="hero__description">{{ store.description }}</p>
-
-          <div class="hero-benefits" aria-label="Преимущества поддержки">
-            <article v-for="benefit in heroBenefits" :key="benefit.title" class="hero-benefit">
-              <SupportIcon :name="benefit.icon" />
-              <div>
-                <strong>
-                  <span class="desktop-copy">{{ benefit.title }}</span>
-                  <span class="mobile-copy">{{ benefit.mobileTitle }}</span>
-                </strong>
-                <span class="hero-benefit__text desktop-copy">{{ benefit.text }}</span>
-                <span class="hero-benefit__text mobile-copy">{{ benefit.mobileText }}</span>
-              </div>
-            </article>
-          </div>
+          <SteamTopup :copy="store.topup" />
         </div>
 
         <div class="hero__visual" aria-hidden="true">

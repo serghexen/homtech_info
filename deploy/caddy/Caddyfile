@@ -1,4 +1,20 @@
 market.homtech.app {
   encode zstd gzip
-  reverse_proxy web:80
+  header Referrer-Policy "no-referrer"
+  header X-Content-Type-Options "nosniff"
+  @topup {
+    method POST
+    path /topup-api/status /topup-api/submit
+  }
+  handle @topup {
+    uri replace /topup-api/ /api/steam-topups/public/
+    reverse_proxy https://seller.homtech.app {
+      header_up Host seller.homtech.app
+      header_up -Cookie
+      header_up -Authorization
+    }
+  }
+  handle {
+    reverse_proxy web:80
+  }
 }
