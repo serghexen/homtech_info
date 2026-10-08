@@ -5,6 +5,13 @@ const joyCards = {
   hostname: 'market.homtech.app',
   eyebrow: 'Мы всегда на связи',
   title: 'Нужна помощь?',
+  heroTitleLead: 'Нужна',
+  heroTitleAccent: 'помощь?',
+  heroBenefits: [
+    { icon: 'clock', title: 'Быстро', text: '5–15 минут', mobileTitle: 'Быстро', mobileText: '5–15 минут' },
+    { icon: 'chat', title: 'Каждый день', text: 'Без выходных', mobileTitle: 'Ежедневно', mobileText: '11:00–22:00' },
+    { icon: 'lock', title: 'Безопасно', text: 'Не просим пароли', mobileTitle: 'Безопасно', mobileText: 'Без паролей' },
+  ],
   description: 'Поддержка JoyCards ответит на вопросы и поможет в любой ситуации.',
   topup: {
     eyebrow: 'Пополнение по вашей ссылке',

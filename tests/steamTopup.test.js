@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { readToken, shouldPoll, topupRequest } from '../src/utils/steamTopup.js'
+import { isTopupPage, readToken, shouldPoll, topupRequest } from '../src/utils/steamTopup.js'
 
 const token = '00000000-0000-4000-8000-000000000000.' + 'a'.repeat(64)
 test('only a full capability token is accepted, never amount or order id', () => {
@@ -22,4 +22,13 @@ test('submit keeps the supplied idempotency key and never sends credentials in U
   assert.equal(requests[0][1].credentials, 'omit')
   assert.deepEqual(JSON.parse(requests[0][1].body),payload)
   await assert.rejects(topupRequest('pay',payload,fetcher))
+})
+
+test('home and support anchors stay on support, Steam links select the topup page', () => {
+  for (const hash of ['', '#support', '#contacts', '#top']) assert.equal(isTopupPage(hash), false)
+  assert.equal(isTopupPage('#topup=' + token), true)
+  assert.equal(isTopupPage('#topup=broken'), true)
+  assert.equal(isTopupPage('#topup='), true)
+  assert.equal(isTopupPage('', '?preview=steam'), false)
+  assert.equal(isTopupPage('', '?preview=steam', true), true)
 })

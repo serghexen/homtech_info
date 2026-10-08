@@ -1,3 +1,10 @@
+export function isTopupPage(hash = '', search = '', development = false) {
+  // Повреждённая персональная ссылка тоже открывает Steam с сообщением об ошибке.
+  // Обычная главная и якоря поддержки не монтируют форму и не запрашивают статус.
+  return new URLSearchParams(hash.replace(/^#/, '')).has('topup')
+    || (development && new URLSearchParams(search).get('preview') === 'steam')
+}
+
 export function readToken(hash = '') {
   // Секрет ссылки хранится во фрагменте: он не попадает в access-log и Referer.
   const token = new URLSearchParams(hash.replace(/^#/, '')).get('topup') || ''

@@ -1,16 +1,22 @@
 <script setup>
-import { onMounted } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import BrandLogo from './components/BrandLogo.vue'
 import ContactCard from './components/ContactCard.vue'
 import SupportIcon from './components/SupportIcon.vue'
 import cloudMascot from './assets/joycards-cloud.png'
 import SteamTopup from './components/SteamTopup.vue'
 import { resolveStore } from './config/stores'
+import { isTopupPage } from './utils/steamTopup.js'
 
 const store = resolveStore(globalThis.location?.hostname)
 
+const routeHash = ref(window.location.hash)
+const showTopup = computed(() => isTopupPage(routeHash.value, window.location.search, import.meta.env.DEV))
+function syncRoute() { routeHash.value = window.location.hash }
 
+onBeforeUnmount(() => window.removeEventListener('hashchange', syncRoute))
 onMounted(() => {
+  window.addEventListener('hashchange', syncRoute)
   // Синхронизирует данные вкладки с магазином, выбранным по текущему домену.
   document.title = store.pageTitle
   document.querySelector('meta[name="description"]')?.setAttribute('content', store.description)
@@ -29,13 +35,32 @@ onMounted(() => {
     </header>
 
     <main id="top" class="wrap">
-      <section class="hero hero--steam" aria-labelledby="hero-title">
+      <section class="hero" :class="{ 'hero--steam': showTopup }" aria-labelledby="hero-title">
         <div class="hero__spark hero__spark--orange" aria-hidden="true">✦</div>
         <div class="hero__spark hero__spark--violet" aria-hidden="true">•</div>
         <div class="hero__spark hero__spark--blue" aria-hidden="true">•</div>
 
         <div class="hero__copy">
-          <SteamTopup :copy="store.topup" />
+          <SteamTopup v-if="showTopup" :key="routeHash" :copy="store.topup" />
+          <template v-else>
+            <p class="availability"><span></span>{{ store.eyebrow }}</p>
+            <h1 id="hero-title">{{ store.heroTitleLead }} <em>{{ store.heroTitleAccent }}</em></h1>
+            <p class="hero__description">{{ store.description }}</p>
+
+            <div class="hero-benefits" aria-label="Преимущества поддержки">
+              <article v-for="benefit in store.heroBenefits" :key="benefit.title" class="hero-benefit">
+                <SupportIcon :name="benefit.icon" />
+                <div>
+                  <strong>
+                    <span class="desktop-copy">{{ benefit.title }}</span>
+                    <span class="mobile-copy">{{ benefit.mobileTitle }}</span>
+                  </strong>
+                  <span class="hero-benefit__text desktop-copy">{{ benefit.text }}</span>
+                  <span class="hero-benefit__text mobile-copy">{{ benefit.mobileText }}</span>
+                </div>
+              </article>
+            </div>
+          </template>
         </div>
 
         <div class="hero__visual" aria-hidden="true">
